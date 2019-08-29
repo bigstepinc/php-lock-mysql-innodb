@@ -1,0 +1,13 @@
+{
+    "name": "bigstep/php-lock-mysql-innodb",
+    "type": "project",
+    "description": "Centralised blocking or non-blocking locks using MySQL's InnoDB transaction features.",
+    "license": "MIT",
+    "require": {
+		"php": "^7.2"
+	},
+    "require-dev": {
+    },
+    "suggest": {
+    }
+}
