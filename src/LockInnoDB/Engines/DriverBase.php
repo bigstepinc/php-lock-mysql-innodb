@@ -65,6 +65,7 @@ namespace LockInnoDB\Engines
 		
 		const LOCK_FILESYSTEM = "LockFile";
 		const LOCK_MYSQL = "MySQL";
+		const LOCK_MYSQLFILO = "MySQLFILO";
 		
 		/**
 		* No. of seconds to wait before retry a non-blocking lock.

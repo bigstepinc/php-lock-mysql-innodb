@@ -6,7 +6,7 @@ namespace LockInnoDB\Engines\FileSystem
 	use \LockInnoDB\Exceptions\LockException;
 
 
-	class Driver extends \LockInnoDB\Engines\DriverBase implements InterfaceDriver
+	class Driver extends \LockInnoDB\Engines\DriverBase
 	{
 		/**
 		 * @var array
