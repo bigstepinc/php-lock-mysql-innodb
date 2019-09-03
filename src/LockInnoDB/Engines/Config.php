@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace LockInnoDB\Engines
+namespace Bigstep\LockInnoDB\Engines
 {
 	class Config
 	{

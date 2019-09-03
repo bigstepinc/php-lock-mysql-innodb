@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace LockInnoDB\Utils
+namespace Bigstep\LockInnoDB\Utils
 {
 	class LockUtils
 	{

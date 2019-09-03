@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace LockInnoDB\Exceptions
+namespace Bigstep\LockInnoDB\Exceptions
 {
 	class CustomPDOException extends \PDOException
 	{

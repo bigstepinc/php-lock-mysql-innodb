@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace LockInnoDB\Engines
+namespace Bigstep\LockInnoDB\Engines
 {
 	abstract class DriverBase
 	{
@@ -37,7 +37,7 @@ namespace LockInnoDB\Engines
 		
 		/**
 		* Remove unused lock files.
-		*/		
+		*/
 		abstract function unusedLocksRemove():void;
 
 
@@ -62,11 +62,9 @@ namespace LockInnoDB\Engines
 			return sys_get_temp_dir();
 		}
 
-		
-		const LOCK_FILESYSTEM = "LockFile";
+
 		const LOCK_MYSQL = "MySQL";
-		const LOCK_MYSQLFILO = "MySQLFILO";
-		
+
 		/**
 		* No. of seconds to wait before retry a non-blocking lock.
 		*/
