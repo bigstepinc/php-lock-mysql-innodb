@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Bigstep\LockInnoDB\Exceptions
+namespace LockInnoDB\Exceptions
 {
 	class LockException extends \Exception
 	{

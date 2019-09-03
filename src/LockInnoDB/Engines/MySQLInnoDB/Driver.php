@@ -2,12 +2,12 @@
 declare(strict_types=1);
 declare(ticks=1000);
 
-namespace Bigstep\LockInnoDB\Engines\MySQLInnoDB
+namespace LockInnoDB\Engines\MySQLInnoDB
 {
-	use \Bigstep\LockInnoDB\Exceptions\LockException;
-	use \Bigstep\LockInnoDB\Engines\DriverBase;
-	use \Bigstep\LockInnoDB\Exceptions\CustomPDOException;
-	use \Bigstep\LockInnoDB\Engines\Config;
+	use \LockInnoDB\Exceptions\LockException;
+	use \LockInnoDB\Engines\DriverBase;
+	use \LockInnoDB\Exceptions\CustomPDOException;
+	use \LockInnoDB\Engines\Config;
 
 
 	class Driver extends DriverBase
@@ -31,13 +31,13 @@ namespace Bigstep\LockInnoDB\Engines\MySQLInnoDB
 		/**
 		 * Required parameters for MySQL configuration
 		 * 
-		 * @var \Bigstep\LockInnoDB\Engines\Config
+		 * @var \LockInnoDB\Engines\Config
 		 */
 		protected $_mysqlConfig;
 
 
 		/**
-		 * @var \Bigstep\LockInnoDB\Engines\DriverBase
+		 * @var \LockInnoDB\Engines\DriverBase
 		 */
 		protected $_lockWrapper;
 
@@ -85,20 +85,20 @@ namespace Bigstep\LockInnoDB\Engines\MySQLInnoDB
 		/**
 		 * $lockWrapper can be used to add multiple locking places and mechanism for increased safety or performance.
 		 *
-		 * @param \Bigstep\LockInnoDB\Engines\DriverBase $lockWrapper = null
+		 * @param \LockInnoDB\Engines\DriverBase $lockWrapper = null
 		 * @param array $config
 		 * @param bool $isStrictFILOAcquireRelease = true
 		 */
-		public function __construct(\Bigstep\LockInnoDB\Engines\DriverBase $lockWrapper = null, array $config)
+		public function __construct(\LockInnoDB\Engines\DriverBase $lockWrapper = null, array $config)
 		{
 			if(is_null($lockWrapper))
 			{
-				$lockWrapper = new \Bigstep\LockInnoDB\Engines\NoLocking\Driver();
+				$lockWrapper = new \LockInnoDB\Engines\NoLocking\Driver();
 			}
 
 			$this->_lockWrapper = $lockWrapper;
 
-			$this->_mysqlConfig = new \Bigstep\LockInnoDB\Engines\Config();
+			$this->_mysqlConfig = new \LockInnoDB\Engines\Config();
 
 			foreach($config as $propertyName => $propertyValue)
 			{
@@ -116,7 +116,7 @@ namespace Bigstep\LockInnoDB\Engines\MySQLInnoDB
 		 * @param int $nonBlockingLockRetries = 0
 		 * @param int $waitSecondsBeforeRetry = self::NON_BLOCKING_LOCK_WAIT_BEFORE_RETRY_SECONDS_DEFAULT
 		 * 
-		 * @throws \Bigstep\LockInnoDB\Exceptions\LockException
+		 * @throws \LockInnoDB\Exceptions\LockException
 		 * @throws \Throwable
 		 */
 		public function acquire(string $lockName, bool $isBlocking, int $nonBlockingLockRetries=0, int $waitSecondsBeforeRetry=self::NON_BLOCKING_LOCK_WAIT_BEFORE_RETRY_SECONDS_DEFAULT):void
@@ -125,11 +125,11 @@ namespace Bigstep\LockInnoDB\Engines\MySQLInnoDB
 			{
 				if($isBlocking)
 				{
-					throw new \Bigstep\LockInnoDB\Exceptions\LockException("Non-blocking MySQL lock ".json_encode($lockName).". ".$this->_processInfo(/*isReadAcquirer*/ true, $lockName), \Bigstep\LockInnoDB\Exceptions\LockException::NON_BLOCKING_LOCK);
+					throw new \LockInnoDB\Exceptions\LockException("Non-blocking MySQL lock ".json_encode($lockName).". ".$this->_processInfo(/*isReadAcquirer*/ true, $lockName), \LockInnoDB\Exceptions\LockException::NON_BLOCKING_LOCK);
 				}
 
 				// Compatibility with the FileSystem lock and disaster prevention.
-				throw new \Bigstep\LockInnoDB\Exceptions\LockException("Deadlock detected. Thread tried to acquire the same MySQL lock (".json_encode($lockName).") without releasing first. ".$this->_processInfo(false, $lockName), \Bigstep\LockInnoDB\Exceptions\LockException::DEADLOCK);
+				throw new \LockInnoDB\Exceptions\LockException("Deadlock detected. Thread tried to acquire the same MySQL lock (".json_encode($lockName).") without releasing first. ".$this->_processInfo(false, $lockName), \LockInnoDB\Exceptions\LockException::DEADLOCK);
 			}
 
 
@@ -163,7 +163,7 @@ namespace Bigstep\LockInnoDB\Engines\MySQLInnoDB
 								`lock_mysql_connection_id` = ".(int)$this->_MySQLConnectionIDs[$lockName].",
 								`lock_acquirer_pid` = ".(int)getmypid().",
 								`lock_acquirer_hostname` = ".$this->_lockPDOConnections[$lockName]->quote(gethostname()).",
-								`lock_acquirer_app_trace` = ".$this->_lockPDOConnections[$lockName]->quote(\Bigstep\LockInnoDB\Utils\LockUtils::getTraceAsStringWithoutParams(new \Exception()))."
+								`lock_acquirer_app_trace` = ".$this->_lockPDOConnections[$lockName]->quote(\LockInnoDB\Utils\LockUtils::getTraceAsStringWithoutParams(new \Exception()))."
 						");
 
 						break;
@@ -194,7 +194,7 @@ namespace Bigstep\LockInnoDB\Engines\MySQLInnoDB
 							}
 							else
 							{
-								throw new \Bigstep\LockInnoDB\Exceptions\LockException("Non-blocking MySQL lock ".json_encode($lockName).". ".$this->_processInfo(/*isReadAcquirer*/ true, $lockName), \Bigstep\LockInnoDB\Exceptions\LockException::NON_BLOCKING_LOCK, $exc);
+								throw new \LockInnoDB\Exceptions\LockException("Non-blocking MySQL lock ".json_encode($lockName).". ".$this->_processInfo(/*isReadAcquirer*/ true, $lockName), \LockInnoDB\Exceptions\LockException::NON_BLOCKING_LOCK, $exc);
 							}
 						}
 
@@ -204,7 +204,7 @@ namespace Bigstep\LockInnoDB\Engines\MySQLInnoDB
 							&& $exc->errorInfo[1]==1213  /*(MySQL SQLSTATE) ER_LOCK_DEADLOCK*/
 						)
 						{
-							throw new \Bigstep\LockInnoDB\Exceptions\LockException("MySQL deadlock ".json_encode($lockName).". ".$exc->getMessage()." ".$this->_processInfo(false, $lockName), \Bigstep\LockInnoDB\Exceptions\LockException::DEADLOCK, $exc);
+							throw new \LockInnoDB\Exceptions\LockException("MySQL deadlock ".json_encode($lockName).". ".$exc->getMessage()." ".$this->_processInfo(false, $lockName), \LockInnoDB\Exceptions\LockException::DEADLOCK, $exc);
 						}
 
 
@@ -228,7 +228,7 @@ namespace Bigstep\LockInnoDB\Engines\MySQLInnoDB
 		 * 
 		 * @throws \Throwable
 		 * @throws \PDOException
-		 * @throws \Bigstep\LockInnoDB\Exceptions\LockException
+		 * @throws \LockInnoDB\Exceptions\LockException
 		 */
 		public function release(string $lockName):void
 		{
@@ -238,7 +238,7 @@ namespace Bigstep\LockInnoDB\Engines\MySQLInnoDB
 
 				$this->_lockPDOConnections[$lockName]->exec("ROLLBACK");
 			}
-			catch(\Bigstep\LockInnoDB\LockException $exc)
+			catch(\LockInnoDB\LockException $exc)
 			{
 				error_log($exc->getMessage()." ".$exc->getTraceAsString());
 			}
@@ -305,7 +305,7 @@ namespace Bigstep\LockInnoDB\Engines\MySQLInnoDB
 		 * @param string $lockName
 		 *
 		 * @throws \Exception
-		 * @throws \Bigstep\LockInnoDB\Exceptions\LockException
+		 * @throws \LockInnoDB\Exceptions\LockException
 		 */
 		public function assertConnected(string $lockName):void
 		{
@@ -320,7 +320,7 @@ namespace Bigstep\LockInnoDB\Engines\MySQLInnoDB
 			}
 			catch(\PDOException $exc)
 			{
-				throw new \Bigstep\LockInnoDB\Exceptions\LockException($exc->getMessage()." ".$this->_processInfo(false, $lockName), \Bigstep\LockInnoDB\Exceptions\LockException::LOCK_INTEGRITY_FAILED, $exc);
+				throw new \LockInnoDB\Exceptions\LockException($exc->getMessage()." ".$this->_processInfo(false, $lockName), \LockInnoDB\Exceptions\LockException::LOCK_INTEGRITY_FAILED, $exc);
 			}
 		}
 
@@ -360,9 +360,9 @@ namespace Bigstep\LockInnoDB\Engines\MySQLInnoDB
 						array_splice($this->_lockAcquisitionOrder, $i, 1);
 						array_splice($this->_lockToAgeSeconds, $i, 1);
 					}
-					catch(\Bigstep\LockInnoDB\Exceptions\LockException $exc)
+					catch(\LockInnoDB\Exceptions\LockException $exc)
 					{
-						if($exc->getCode() === \Bigstep\LockInnoDB\Exceptions\LockException::LOCK_INTEGRITY_FAILED)
+						if($exc->getCode() === \LockInnoDB\Exceptions\LockException::LOCK_INTEGRITY_FAILED)
 						{
 							// We're trying to disconnect all locks and all MySQL connections.
 							// So it is OK to just log the errors about being no longer connected and such. Except some connectivity issues might get by in this particular instance 
@@ -381,7 +381,7 @@ namespace Bigstep\LockInnoDB\Engines\MySQLInnoDB
 					// Avoid last catch block.
 					error_log($exc->getMessage()." ".$exc->getTraceAsString());
 				}
-				catch(\Bigstep\LockInnoDB\Exceptions\LockException $exc)
+				catch(\LockInnoDB\Exceptions\LockException $exc)
 				{
 					// Avoid last catch block.
 					error_log($exc->getMessage()." ".$exc->getTraceAsString());
