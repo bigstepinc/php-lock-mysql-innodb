@@ -93,11 +93,6 @@ namespace LockInnoDB\Engines\MySQLInnoDBFILO
 		 */
 		public function __construct(\LockInnoDB\Engines\DriverBase $lockWrapper = null, array $config, bool $isStrictFILOAcquireRelease = true)
 		{
-			if(!array_key_exists("maxHeapTableSize", $config))
-			{
-				throw new \LockInnoDB\Exceptions\CustomPDOException("'maxHeapTableSize' property is mandatory in mysql config.");
-			}
-
 			if(is_null($lockWrapper))
 			{
 				$lockWrapper = new \LockInnoDB\Engines\NoLocking\Driver();

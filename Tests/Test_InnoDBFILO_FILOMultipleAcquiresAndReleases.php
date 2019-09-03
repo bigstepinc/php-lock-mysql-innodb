@@ -18,17 +18,13 @@ if(count($argv) <= 1)
 {
 	echo 
 		"Usage:".PHP_EOL.
-		"  Test_InnoDBFILO_FILOMultipleAcquiresAndReleases --databaseName='test' --port=3306 --host='localhost' --username='root' -password='root' --minInnoDBBufferPoolSize=124".PHP_EOL.PHP_EOL.
-		"Optional arguments:".PHP_EOL.
-		"  [--maxHeapTableSize=124]".PHP_EOL.PHP_EOL.
+		"  Test_InnoDBFILO_FILOMultipleAcquiresAndReleases --databaseName='test' --port=3306 --host='localhost' --username='root' --password='root'".PHP_EOL.PHP_EOL.
 		"Details:".PHP_EOL.
 		"  --databaseName               The name of the database you want to connect to. Accepts a string. Example: test.".PHP_EOL.
 		"  --port                       The port that MySQL uses. Accepts an int. Example: 3306.".PHP_EOL.
 		"  --host                       The name of the host you want to connect to. Accepts string. Example: localhost.".PHP_EOL.
 		"  --username                   Your MySQL username. Accepts string. Example: root.".PHP_EOL.
-		"  --password                   Your MySQL password. Accepts string. Example: root.".PHP_EOL.
-		"  --minInnoDBBufferPoolSize    The minimum ammount, in MB, that buffer pool size should have. Accepts int. Example: 124.".PHP_EOL.
-		"  --maxHeapTableSize           The maximum ammount, in MB, that user-created memory tables can grow to. Accepts int. Example: 124.".PHP_EOL
+		"  --password                   Your MySQL password. Accepts string. Example: root.".PHP_EOL
 	;
 }
 else
@@ -39,16 +35,6 @@ else
 		"host" => "",
 		"username" => "",
 		"password" => "",
-		"logsPath" => "",
-		"lock" => "",
-		"cache" => "",
-		"upgraderInfo" => "",
-		"isInProduction" => false,
-		"minInnoDBBufferPoolSize" => 1,
-		"maxHeapTableSize" => 124,
-		"transactionIsolationLevel" => "REPEATABLE READ",
-		"enableDebug" => false,
-		"enableQueryComments" => false
 	];
 
 	for($i = 1; $i < $argc; $i++)
