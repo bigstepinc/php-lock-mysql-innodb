@@ -37,7 +37,7 @@ namespace Bigstep\LockInnoDB\Engines\MySQLInnoDB
 
 
 		/**
-		 * @var \LockInnoDB\Engines\DriverBase
+		 * @var \Bigstep\LockInnoDB\Engines\DriverBase
 		 */
 		protected $_lockWrapper;
 
