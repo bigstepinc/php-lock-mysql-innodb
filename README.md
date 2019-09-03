@@ -26,8 +26,7 @@ You will need a config with the following MySQL parameters:
         "port" => 3306,
         "host" => "localhost",
         "username" => "username",
-        "password" => "password",
-        "maxHeapTableSize" => 124,
+        "password" => "password"
     ];
 
 Then you can instantiate the MySQL InnoDB Driver and start acquiring locks.
