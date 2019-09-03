@@ -1,7 +1,7 @@
 {
     "name": "bigstep/lock-mysql-innodb",
     "description": "Centralised blocking or non-blocking locks using MySQL's InnoDB transaction features.",
-    "version": "1.0.0",
+    "version": "v1.0.1",
     "type": "library",
     "keywords": ["locking","MySQL","InnoDB"],
     "homepage": "https://github.com/bigstepinc/php-lock-mysql-innodb",
