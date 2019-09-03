@@ -5,7 +5,6 @@
     "type": "library",
     "keywords": ["locking","MySQL","InnoDB"],
     "homepage": "https://github.com/bigstepinc/php-lock-mysql-innodb",
-    "minimum-stability": "stable",
     "license": "MIT",
     "autoload": {
         "psr-4": {"LockInnoDB\\": "src/LockInnoDB"}
