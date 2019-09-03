@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Bigstep\LockInnoDB\Engines
+namespace LockInnoDB\Engines
 {
 	abstract class DriverBase
 	{

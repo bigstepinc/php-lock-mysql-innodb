@@ -7,7 +7,7 @@
     "homepage": "https://github.com/bigstepinc/php-lock-mysql-innodb",
     "license": "MIT",
     "autoload": {
-        "psr-4": {"Bigstep\\": "src/"}
+        "psr-4": {"LockInnoDB\\": "src/LockInnoDB/"}
     },
     "require": {
         "php": "^7.2"

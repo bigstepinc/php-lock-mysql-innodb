@@ -31,7 +31,7 @@ You will need a config with the following MySQL parameters:
 
 Then you can instantiate the MySQL InnoDB Driver and start acquiring locks.
 
-    $client = new Bigstep\LockInnoDB\Engines\MySQLInnoDB\Driver(/*\Bigstep\LockInnoDB\Engines\DriverBase*/ null, $array);
+    $client = new LockInnoDB\Engines\MySQLInnoDB\Driver(/*\LockInnoDB\Engines\DriverBase*/ null, $array);
 
     $client->acquire("Lock1", true);
     $client->release("Lock1");

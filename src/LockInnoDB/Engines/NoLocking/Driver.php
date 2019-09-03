@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Bigstep\LockInnoDB\Engines\NoLocking
+namespace LockInnoDB\Engines\NoLocking
 {
-	use \Bigstep\LockInnoDB\Exceptions\LockException;
-	use \Bigstep\LockInnoDB\Engines\DriverBase;
+	use \LockInnoDB\Exceptions\LockException;
+	use \LockInnoDB\Engines\DriverBase;
 
 
 	class Driver extends DriverBase
@@ -20,7 +20,7 @@ namespace Bigstep\LockInnoDB\Engines\NoLocking
 		 * @param int $nonBlockingLockRetries = 0
 		 * @param int $waitSecondsBeforeRetry = self::NON_BLOCKING_LOCK_WAIT_BEFORE_RETRY_SECONDS_DEFAULT
 		 * 
-		 * @throws \Bigstep\LockInnoDB\Exceptions\LockException
+		 * @throws \LockInnoDB\Exceptions\LockException
 		 * @throws \Throwable
 		 */
 		public function acquire(string $lockName, bool $isBlocking, int $nonBlockingLockRetries=0, int $waitSecondsBeforeRetry=self::NON_BLOCKING_LOCK_WAIT_BEFORE_RETRY_SECONDS_DEFAULT):void
@@ -31,7 +31,7 @@ namespace Bigstep\LockInnoDB\Engines\NoLocking
 		/**
 		 * @param string $lockName
 		 * 
-		 * @throws \Bigstep\LockInnoDB\Exceptions\LockException
+		 * @throws \LockInnoDB\Exceptions\LockException
 		 */
 		public function release(string $lockName):void
 		{
