@@ -2,9 +2,10 @@
     "name": "bigstep/lock-mysql-innodb",
     "description": "Centralised blocking or non-blocking locks using MySQL's InnoDB transaction features.",
     "version": "1.0.0",
-    "type": "project",
+    "type": "library",
     "keywords": ["locking","MySQL","InnoDB"],
     "homepage": "https://github.com/bigstepinc/php-lock-mysql-innodb",
+    "minimum-stability": "stable",
     "license": "MIT",
     "autoload": {
         "psr-4": {"LockInnoDB\\": "src/LockInnoDB"}
