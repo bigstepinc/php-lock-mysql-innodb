@@ -22,7 +22,7 @@ Usage
 You will need a config with the following MySQL parameters:
 
     $array = [
-        "databaseName" => "database",
+        "databaseName" => "databaseName",
         "port" => 3306,
         "host" => "localhost",
         "username" => "username",
