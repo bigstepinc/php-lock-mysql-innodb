@@ -4,12 +4,12 @@ SET sql_mode = 'STRICT_ALL_TABLES';
 ROLLBACK;
 
 
-CREATE TABLE `locks` (
+CREATE TABLE IF NOT EXISTS `locks` (
 	`lock_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
 	PRIMARY KEY (`lock_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE `locks_metadata` (
+CREATE TABLE IF NOT EXISTS `locks_metadata` (
 	`lock_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
 	`lock_acquire_timestamp` char(24) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
 	`lock_is_exclusive` tinyint(1) unsigned NOT NULL,
